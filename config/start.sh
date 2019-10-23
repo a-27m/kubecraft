@@ -25,8 +25,9 @@ fi
 
 sed -i "s/@BIOME@/${biome}/g;s/@GROUNDLEVEL@/${groundlevel}/g;s/@SEALEVEL@/${sealevel}/g;s/@FINISHERS@/${finishers}/g" /srv/Server/world/world.ini
 
-echo Starting Dockercraft
+# Start goproxy
+goproxy > /srv/Server/world/goproxy_out 2>&1 &
+
+# start Minecraft C++ server
 cd /srv/Server
-dockercraft &
-sleep 5
 ./Cuberite
