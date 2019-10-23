@@ -1,6 +1,7 @@
 # Kubecraft
 
 A simple Minecraft Docker client, to visualize and manage Kubernetes pods.
+![Dockercraft](https://github.com/docker/dockercraft/raw/master/docs/img/logo.png?raw=true)
 
 [YouTube video](https://youtu.be/A4qwsSEldHE)
 
