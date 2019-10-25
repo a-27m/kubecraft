@@ -14,14 +14,14 @@ A simple Minecraft Docker client, to visualize and manage Kubernetes pods.
 2. **Pull or build Kubecraft image:**
 
 	```
-	docker pull stevesloka/kubecraft
+	docker pull containersol/kubecraft
 	```
 	or
 
 	```
-	git clone git@github.com:stevesloka/kubecraft.git
+	git clone git@github.com:ContainerSolutions/kubecraft.git
 	cd kubecraft && go/src/kubeproxy/make
-	docker build -t stevesloka/kubecraft .
+	docker build -t containersol/kubecraft .
 	```
 3. **Run Kubecraft container:**
 
@@ -30,7 +30,7 @@ A simple Minecraft Docker client, to visualize and manage Kubernetes pods.
 	--name kubecraft \
 	-e KUBE_CFG_FILE=/etc/kubeconfig \
 	-v ~/.kube/config:/etc/kubeconfig \
-	stevesloka/kubecraft
+	containersol/kubecraft
 	```
 
 	Copying `kubeconfig` file to enable k8s api server
