@@ -7,3 +7,4 @@ world/whitelist.sqlite
 world/world/stats/Pixowl.json
 goproxy/goproxy
 dockercraft
+.idea
