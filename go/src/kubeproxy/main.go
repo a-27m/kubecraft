@@ -30,7 +30,7 @@ func main() {
 	// kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
 	// }
 	// flag.Parse()
-	kubeconfig = os.Getenv("KUBE_CFG_FILE")
+	kubeconfig = os.Getenv("KUBECONFIG")
 
 	// use the current context in kubeconfig
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)

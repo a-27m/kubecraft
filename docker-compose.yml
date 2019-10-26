@@ -1,11 +1,9 @@
 dockercraft:
   container_name: dockercraft
-  build: .
+  image: containersol/kubecraft:latest
   volumes:
-    - "/var/run/docker.sock:/var/run/docker.sock"
+    - ~/.config/gcloud:/root/.gcloud
     - ~/.kube/config:/etc/kubeconfig
   ports:
     - "25565:25565"
   tty: true
-  environment:
-    - KUBE_CFG_FILE=/etc/kubeconfig

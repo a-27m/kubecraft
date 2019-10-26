@@ -23,11 +23,11 @@ if [ -n "$4" ]; then
     finishers="$4"
 fi
 
-sed -i "s/@BIOME@/${biome}/g;s/@GROUNDLEVEL@/${groundlevel}/g;s/@SEALEVEL@/${sealevel}/g;s/@FINISHERS@/${finishers}/g" /srv/Server/world/world.ini
+sed -i "s/@BIOME@/${biome}/g;s/@GROUNDLEVEL@/${groundlevel}/g;s/@SEALEVEL@/${sealevel}/g;s/@FINISHERS@/${finishers}/g" /opt/Server/world/world.ini
 
 # Start goproxy
-goproxy > /srv/Server/world/goproxy_out 2>&1 &
+goproxy > /opt/Server/world/goproxy_out 2>&1 &
 
 # start Minecraft C++ server
-cd /srv/Server
+cd /opt/Server
 ./Cuberite

@@ -392,8 +392,8 @@ function OnServerPing(ClientHandle, ServerDescription, OnlinePlayers, MaxPlayers
 	-- Change Server Description
 	ServerDescription = "A Docker client for Minecraft"
 	-- Change favicon
-	if cFile:IsFile("/srv/logo.png") then
-		local FaviconData = cFile:ReadWholeFile("/srv/logo.png")
+	if cFile:IsFile("/opt/logo.png") then
+		local FaviconData = cFile:ReadWholeFile("/opt/logo.png")
 		if (FaviconData ~= "") and (FaviconData ~= nil) then
 			Favicon = Base64Encode(FaviconData)
 		end

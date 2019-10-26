@@ -28,7 +28,7 @@ A simple Minecraft Docker client, to visualize and manage Kubernetes pods.
 	```
 	docker run -t -d -i -p 25565:25565 \
 	--name kubecraft \
-	-e KUBE_CFG_FILE=/etc/kubeconfig \
+	-e KUBECONFIG=/etc/kubeconfig \
 	-v ~/.kube/config:/etc/kubeconfig \
 	containersol/kubecraft
 	```
