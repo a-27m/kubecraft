@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: kubecraft
+  name: kubecraft
+  namespace: default
+spec:
+#  externalTrafficPolicy: Cluster
+  ports:
+  - port: 25565
+    protocol: TCP
+    targetPort: 25565
+  selector:
+    run: kubecraft
+  type: LoadBalancer

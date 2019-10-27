@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    run: kubecraft
+  name: kubecraft
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: kubecraft
+  template:
+    metadata:
+      labels:
+        run: kubecraft
+    spec:
+      containers:
+      - env:
+        - name: KUBECONFIG
+          value: /etc/kubeconfig
+        image: docker.io/mrchrd/kubecraft:latest
+        name: kubecraft
+        stdin: true
+        tty: true
