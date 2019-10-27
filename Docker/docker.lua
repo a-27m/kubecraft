@@ -233,7 +233,7 @@ function PlayerUsingBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, Cu
 	then
 		containerID, running = getRemoveButtonContainer(BlockX,BlockZ)
 			Player:SendMessage("kubectl delete po " .. containerID)
-			os.execute("goproxy exec?cmd=kubectl+delete+po+" .. containerID .. "+--kubeconfig=/etc/kubeconfig")
+			os.execute("goproxy exec?cmd=kubectl+delete+po+" .. containerID)
 	end
 end
 
@@ -264,7 +264,7 @@ function DockerCommand(Split, Player)
 					-- remove '/' at the beginning
 					command = string.sub(EntireCommand, 2, -1)
 
-					r = os.execute("goproxy exec?cmd=" .. command ..  "+--kubeconfig=/etc/kubeconfig")
+					r = os.execute("goproxy exec?cmd=" .. command)
 
 					LOG("executed: " .. command .. " -> " .. tostring(r))
 

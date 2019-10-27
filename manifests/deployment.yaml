@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -16,10 +17,7 @@ spec:
         run: kubecraft
     spec:
       containers:
-      - env:
-        - name: KUBECONFIG
-          value: /etc/kubeconfig
-        image: docker.io/mrchrd/kubecraft:latest
+      - image: docker.io/mrchrd/kubecraft:latest
         name: kubecraft
         stdin: true
         tty: true
