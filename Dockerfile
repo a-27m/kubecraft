@@ -8,7 +8,7 @@ RUN wget -qO- "https://builds.cuberite.org/job/Cuberite Linux x64 Master/${CUBER
   tar -xzf -
 
 FROM golang:1.12 AS kubecraft
-ARG KUBECTL_VERSION=1.16.2
+ARG KUBECTL_VERSION=1.15.5
 WORKDIR /go/src/kubeproxy
 COPY ./go /go
 RUN export GO111MODULE=on && go mod init
