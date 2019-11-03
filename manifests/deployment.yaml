@@ -5,7 +5,7 @@ metadata:
   labels:
     run: kubecraft
   name: kubecraft
-  namespace: default
+  namespace: kubecraft
 spec:
   replicas: 1
   selector:
