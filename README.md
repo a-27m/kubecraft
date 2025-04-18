@@ -84,12 +84,12 @@ func MCServerRequest(data url.Values, client *http.Client) {
 }
 ```
 
-The kubeproxy binary can also be executed with parameters from the Lua plugin, to send requests to the daemon:
+The `kubeproxy` binary can also be executed with parameters from the Lua plugin, to send requests to the daemon:
 
 ```lua
 function PlayerJoined(Player)
 	-- refresh containers
-	r = os.execute("goproxy containers")
+	r = os.execute("kubeproxy containers")
 end
 ```
 ## Thanks!

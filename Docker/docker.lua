@@ -38,6 +38,8 @@ function Initialize(Plugin)
 
 	cPluginManager.BindCommand("/kubectl", "*", DockerCommand, " - docker CLI commands")
 
+    -- Plugin:AddWebTab("Docker",HandleRequest_Docker)
+    -- TODO: rename
 	Plugin:AddWebTab("Docker",HandleRequest_Docker)
 
 	-- make all players admin
@@ -196,8 +198,10 @@ function PlayerJoined(Player)
 
 	-- refresh containers
 	LOG("player joined")
-	r = os.execute("goproxy containers")
-	LOG("executed: goproxy containers -> " .. tostring(r))
+-- 	r = os.execute("goproxy containers")
+-- 	LOG("executed: goproxy containers -> " .. tostring(r))
+	r = os.execute("kubeproxy containers")
+	LOG("executed: kubeproxy pods -> " .. tostring(r))
 end
 
 --
@@ -233,7 +237,7 @@ function PlayerUsingBlock(Player, BlockX, BlockY, BlockZ, BlockFace, CursorX, Cu
 	then
 		containerID, running = getRemoveButtonContainer(BlockX,BlockZ)
 			Player:SendMessage("kubectl delete po " .. containerID)
-			os.execute("goproxy exec?cmd=kubectl+delete+po+" .. containerID)
+			os.execute("kubeproxy exec?cmd=kubectl+delete+po+" .. containerID)
 	end
 end
 
@@ -264,10 +268,9 @@ function DockerCommand(Split, Player)
 					-- remove '/' at the beginning
 					command = string.sub(EntireCommand, 2, -1)
 
-					r = os.execute("goproxy exec?cmd=" .. command)
+					r = os.execute("kubeproxy exec?cmd=" .. command)
 
 					LOG("executed: " .. command .. " -> " .. tostring(r))
-
 			end
 		end
 	end
@@ -285,7 +288,7 @@ function HandleRequest_Docker(Request)
 
 		action = Request.PostParams["action"]
 
-		-- receiving informations about one container
+		-- receiving information about one container
 
 		if action == "containerInfos"
 		then

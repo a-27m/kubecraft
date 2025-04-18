@@ -1,5 +1,5 @@
-@9Welcome to Kubecraft!
-@9https://github.com/stevesloka/kubecraft
-@cWarning: Use on your local machine only
-@cKubecraft is not safe for use on production servers
-@9Type /kubectl to use k8s CLI commands!
+@9 Welcome to Kubecraft!
+@9 https://github.com/a-27m/kubecraft
+@c Warning: Use on your local machine only
+@c Kubecraft is not safe for use on production servers
+@9 Type /kubectl to use k8s CLI commands!

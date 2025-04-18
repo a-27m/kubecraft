@@ -1,8 +1,10 @@
-dockercraft:
-  container_name: dockercraft
-  image: containersol/kubecraft:latest
-  environment:
-    KUBECONFIG: /etc/kubeconfig
-  ports:
-    - "25565:25565"
-  tty: true
+---
+services:
+  dockercraft:
+    container_name: dockercraft
+    image: containersol/kubecraft:latest
+    environment:
+      KUBECONFIG: /etc/kubeconfig
+    ports:
+      - "25565:25565"
+    tty: true

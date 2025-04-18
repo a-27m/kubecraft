@@ -39,7 +39,7 @@ function NewUpdateQueue()
 		function update:exec()
 			if self.op == UPDATE_SET
 			then
-				cRoot:Get():GetDefaultWorld():SetBlock(self.x,self.y,self.z,self.blockID,self.meta)
+				cRoot:Get():GetDefaultWorld():SetBlock(Vector3i(self.x,self.y,self.z),self.blockID,self.meta)
 			elseif self.op == UPDATE_DIG
 			then
 				cRoot:Get():GetDefaultWorld():DigBlock(self.x,self.y,self.z)

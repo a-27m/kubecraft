@@ -26,7 +26,9 @@ fi
 sed -i "s/@BIOME@/${biome}/g;s/@GROUNDLEVEL@/${groundlevel}/g;s/@SEALEVEL@/${sealevel}/g;s/@FINISHERS@/${finishers}/g" /opt/Server/world/world.ini
 
 # Start goproxy
-goproxy > /opt/Server/world/goproxy_out 2>&1 &
+#goproxy > /opt/Server/world/goproxy_out 2>&1 &
+
+kubeproxy 2>&1 | tee /opt/Server/world/kubeproxy_out 2>&1 &
 
 # start Minecraft C++ server
 cd /opt/Server

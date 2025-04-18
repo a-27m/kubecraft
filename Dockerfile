@@ -1,30 +1,35 @@
-FROM alpine:3.10 AS wget
+FROM alpine AS wget
 RUN apk add --no-cache ca-certificates wget tar
 
 FROM wget AS cuberite
 ARG CUBERITE_BUILD=1057
 WORKDIR /opt
-RUN wget -qO- "https://builds.cuberite.org/job/Cuberite Linux x64 Master/${CUBERITE_BUILD}/artifact/Cuberite.tar.gz" |\
+# TODO: replace with a specific version, use CUBERITE_BUILD
+RUN wget -qO- "https://download.cuberite.org/linux-x86_64/Cuberite.tar.gz" | \
   tar -xzf -
 
-FROM golang:1.12 AS kubecraft
-ARG KUBECTL_VERSION=1.15.5
+FROM golang:1.24 AS kubecraft
+ARG KUBECTL_VERSION=1.32.3
 WORKDIR /go/src/kubeproxy
 COPY ./go /go
-RUN export GO111MODULE=on && go mod init
-RUN export GO111MODULE=on && go get k8s.io/client-go@kubernetes-${KUBECTL_VERSION}
-RUN export GO111MODULE=on && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o kubeproxy ./main.go
+RUN go get k8s.io/client-go@kubernetes-${KUBECTL_VERSION}
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o kubeproxy ./main.go
 
-FROM debian:buster
-RUN apt-get update; apt-get install -y ca-certificates
-COPY --from=kubecraft /go/src/kubeproxy/kubeproxy /usr/local/bin/goproxy
-COPY --from=cuberite /opt /opt
+FROM debian:bookworm-slim
+COPY --from=kubecraft /go/src/kubeproxy/kubeproxy /usr/local/bin/kubeproxy
+COPY --from=cuberite /opt /opt/Server
 
-RUN apt-get update -y && apt-get install curl gnupg lsb-release -y && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -y \
+    && apt-get install -y \
+      ca-certificates \
+      curl \
+      gnupg \
+      lsb-release \
+    && rm -rf /var/lib/apt/lists/*
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \
     echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    apt-get update -y && apt-get install google-cloud-sdk kubectl -y && rm -rf /var/lib/apt/lists/*
+    apt-get update -y && apt-get install kubectl -y && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
 

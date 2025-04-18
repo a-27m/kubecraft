@@ -57,8 +57,8 @@ function Container:destroy(running)
 	Z = self.z+2
 	LOG("Exploding at X:" .. X .. " Y:" .. Y .. " Z:" .. Z)
 	local World = cRoot:Get():GetDefaultWorld()
-	World:BroadcastSoundEffect("random.explode", X, Y, Z, 1, 1)
-	World:BroadcastParticleEffect("hugeexplosion",X, Y, Z, 0, 0, 0, 1, 1)
+	World:BroadcastSoundEffect("random.explode", Vector3d(X, Y, Z), 1, 1)
+	World:BroadcastParticleEffect("hugeexplosion",Vector3f(X, Y, Z), Vector3f(0, 0, 0), 1, 1)
 
 	-- if a block is removed before it's button/lever/sign, that object will drop
 	-- and the player can collect it. Remove these first
@@ -145,12 +145,12 @@ function Container:display(running)
 	--updateSign(UpdateQueue,self.x+1,GROUND_LEVEL + 3,self.z + 2,"","START/STOP","---->","",2)
 
 
-	--if running
-	--then
-	--	setBlock(UpdateQueue,self.x+1,GROUND_LEVEL+3,self.z+1,E_BLOCK_LEVER,1)
-	--else
-	--	setBlock(UpdateQueue,self.x+1,GROUND_LEVEL+3,self.z+1,E_BLOCK_LEVER,9)
-	--end
+	if running
+	then
+		setBlock(UpdateQueue,self.x+1,GROUND_LEVEL+3,self.z+1,E_BLOCK_LEVER,1)
+	else
+		setBlock(UpdateQueue,self.x+1,GROUND_LEVEL+3,self.z+1,E_BLOCK_LEVER,9)
+	end
 
 
 	-- remove button
